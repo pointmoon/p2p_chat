@@ -6,6 +6,7 @@
 #include <winsock2.h>
 #include <WS2tcpip.h>
 #include <fstream>
+#include <string>
 
 static SOCKET s_socket;
 
@@ -95,7 +96,7 @@ UINT _cdecl p2p_manager::DataThreadFunc(LPVOID pParam)
 	SOCKET pYourSocket = sock_TEMP;
 	Cp2p_chatDlg* twerk = reinterpret_cast<Cp2p_chatDlg*>(pParam);
 
-	char server_reply[2000];
+	char server_reply[1024];
 	int recv_size;
 	const char* specialChar_start = "%4!_%8!_%1!_%5!_%1!_%6!_%2!_%3!_%4!_%2!";
 	const char* specialChar_end = "*373__=382%^535#32223fe3^^#$d2";
@@ -104,7 +105,7 @@ UINT _cdecl p2p_manager::DataThreadFunc(LPVOID pParam)
 	ofstream pStream;
 	char* fileName = new char;
 
-	while ((recv_size = recv(pYourSocket, server_reply, 2000, 0)) != SOCKET_ERROR)
+	while ((recv_size = recv(pYourSocket, server_reply, 1024, 0)) != SOCKET_ERROR)
 	{
 		//следующее собщение будет именем файла
 		if (stricmp(specialChar_start, server_reply) == 0)
@@ -145,26 +146,16 @@ UINT _cdecl p2p_manager::DataThreadFunc(LPVOID pParam)
 			}
 			////////////////////////////
 			const char* name = ext.c_str();
-			//twerk->ShowServerInfo((string)name);
 			string information(name);
-			//twerk->MessageBox((LPCTSTR)name, MB_OK);
 			twerk->ShowServerInfo(information);
 			count++;
-			//ofstream outfile(name, ios_base::out | ios_base::binary);
 			pStream.open(name, ios_base::out | ios_base::binary);
-			//fileName = (char*)name;
-			//pStream = &outfile;
 			continue;
 		}
 
 		if (count == 2)
 		{
-			//ofstream outfile_new(fileName, ios_base::binary | ios_base::ate);
-			//twerk->MessageBox((LPCTSTR)fileName, MB_OK);
 			pStream.write(server_reply, 1024);
-			//*pStream << server_reply;
-			//outfile_new.write((char*)server_reply, 1024);
-			//outfile_new.close();
 		}
 	}
 

@@ -277,7 +277,7 @@ void Cp2p_chatDlg::OnBnClickedButtonStopServer()
 	GetDlgItem(IDC_BUTTON_STOP_SERVER)->EnableWindow(FALSE);
 	GetDlgItem(IDC_BUTTON_START_SERVER)->EnableWindow(TRUE);
 
-	CloseHandle(m_Thread_handle);
+	//CloseHandle(m_Thread_handle);
 	m_pServer = NULL;
 }
 
@@ -370,14 +370,13 @@ void Cp2p_chatDlg::OnBnClickedButtonSendFile()
 	while (!infile.eof())
 	{
 		char buffer[1024];
+		//char* buffer;
 		infile.read(buffer, 1024);
 		if (infile.gcount())
 		{
 			send(socket_forAll, buffer, 1024, 0);
 			Sleep(10);
 		}
-		//delete buffer;
-		//buffer = NULL;
 	}
 
 	const char* specialChar_end = "*373__=382%^535#32223fe3^^#$d2";
