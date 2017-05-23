@@ -30,7 +30,7 @@ Clientcon::~Clientcon(void)
 void Clientcon::StartRecv(SOCKET sock)
 {
 	s = sock;
-char server_reply[1024];
+char server_reply[2000];
 	int recv_size;
 	const char* specialChar_start = "%4!_%8!_%1!_%5!_%1!_%6!_%2!_%3!_%4!_%2!";
 	const char* specialChar_end = "*373__=382%^535#32223fe3^^#$d2";
