@@ -50,7 +50,6 @@ END_MESSAGE_MAP()
 Cp2p_chatDlg::Cp2p_chatDlg(CWnd* pParent /*=NULL*/)
 	: CDialogEx(Cp2p_chatDlg::IDD, pParent)
 	, m_pServer(NULL)
-	, Str_clientName(_T(""))
 	, int_portNumber(0)
 	, Str_outMessage(_T(""))
 	, Str_STATUS(_T(""))
@@ -65,8 +64,6 @@ Cp2p_chatDlg::Cp2p_chatDlg(CWnd* pParent /*=NULL*/)
 void Cp2p_chatDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX);
-	DDX_Text(pDX, IDC_EDIT2, Str_clientName);
-	DDV_MaxChars(pDX, Str_clientName, 15);
 	DDX_Text(pDX, IDC_EDIT3, int_portNumber);
 	DDX_Text(pDX, IDC_EDIT5, Str_outMessage);
 	DDX_Text(pDX, IDC_EDIT6, Str_STATUS);
@@ -85,7 +82,6 @@ BEGIN_MESSAGE_MAP(Cp2p_chatDlg, CDialogEx)
 	ON_BN_CLICKED(IDC_BUTTON_sendMSG, &Cp2p_chatDlg::OnBnClickedButtonsendmsg)
 	ON_BN_CLICKED(IDC_BUTTON_connect, &Cp2p_chatDlg::OnBnClickedButtonconnect)
 	ON_BN_CLICKED(IDC_BUTTON_disconnect, &Cp2p_chatDlg::OnBnClickedButtondisconnect)
-	ON_BN_CLICKED(IDC_BUTTON_clearHistory, &Cp2p_chatDlg::OnBnClickedButtonClearHistory)
 	ON_BN_CLICKED(IDC_BUTTON_START_SERVER, &Cp2p_chatDlg::OnBnClickedButtonStartServer)
 	ON_BN_CLICKED(IDC_BUTTON_STOP_SERVER, &Cp2p_chatDlg::OnBnClickedButtonStopServer)
 	ON_BN_CLICKED(IDC_BUTTON_sendFILE, &Cp2p_chatDlg::OnBnClickedButtonSendFile)
@@ -128,7 +124,6 @@ BOOL Cp2p_chatDlg::OnInitDialog()
 	Str_STATUS = "Не подключен";
 	dWord_IPaddr = 2130706433; //ip-addr 127.0.0.1
 	int_portNumber = 3425;
-	Str_clientName = "Васька";
 	
 	UpdateData(FALSE);
 	return TRUE;  // возврат значения TRUE, если фокус не передан элементу управления
@@ -253,13 +248,6 @@ void Cp2p_chatDlg::OnBnClickedButtondisconnect()
 	GetDlgItem(IDC_MFCEDITBROWSE1)->EnableWindow(FALSE);
 	GetDlgItem(IDC_BUTTON_START_SERVER)->EnableWindow(TRUE);
 	GetDlgItem(IDC_BUTTON_connect)->EnableWindow(TRUE);
-}
-
-//Обработчик кнопки - "Очистить историю"
-void Cp2p_chatDlg::OnBnClickedButtonClearHistory()
-{
-	ShowServerInfo("Hello world!");
-	MessageBox(L"История очищена!", L"Информация", MB_OK | MB_ICONINFORMATION);
 }
 
 

@@ -38,8 +38,6 @@ protected:
 	afx_msg HCURSOR OnQueryDragIcon();
 	DECLARE_MESSAGE_MAP()
 public:
-	// ¬ведЄнное им€ клиента
-	CString Str_clientName;
 	// ¬ведЄнный клиентом номер порта
 	int int_portNumber;
 	// ¬ведЄнное клиентом сообщение
@@ -52,7 +50,6 @@ public:
 	afx_msg void OnBnClickedButtonsendmsg();
 	afx_msg void OnBnClickedButtonconnect();
 	afx_msg void OnBnClickedButtondisconnect();
-	afx_msg void OnBnClickedButtonClearHistory();
 	afx_msg void OnBnClickedButtonStartServer();
 	afx_msg void OnBnClickedButtonStopServer();
 	afx_msg void OnEnChangeEdit4();
